@@ -1,6 +1,7 @@
 package br.pro.hashi.ensino.desagil.desafio;
 
 import br.pro.hashi.ensino.desagil.desafio.model.CpuPlayer;
+import br.pro.hashi.ensino.desagil.desafio.model.Element;
 import br.pro.hashi.ensino.desagil.desafio.model.HumanPlayer;
 import br.pro.hashi.ensino.desagil.desafio.model.Model;
 
@@ -31,6 +32,7 @@ public class Controller implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent event) {
         HumanPlayer humanPlayer = model.getHumanPlayer();
+        Element target = model.getTarget();
 
         // Para agir de acordo com a tecla que foi pressionada, comparamos o key code do evento com as
         // constantes disponíveis na classe KeyEvent. Uma lista dessas constantes pode ser vista em
@@ -50,6 +52,10 @@ public class Controller implements KeyListener, ActionListener {
                 break;
         }
 
+        if (humanPlayer.getCol() == target.getCol() && humanPlayer.getRow() == target.getRow()) {
+            humanPlayer.incrementPoints();
+            //System.out.println("ponto human");
+        }
         view.repaint();
     }
 
@@ -65,7 +71,11 @@ public class Controller implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         CpuPlayer cpuPlayer = model.getCpuPlayer();
-
+        Element target = model.getTarget();
+        if (cpuPlayer.getCol() == target.getCol() && cpuPlayer.getRow() == target.getRow()) {
+            cpuPlayer.incrementPoints();
+            //System.out.println("ponto cpu");
+        }
         cpuPlayer.move();
 
         view.repaint();

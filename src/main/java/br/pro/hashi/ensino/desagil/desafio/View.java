@@ -70,7 +70,15 @@ public class View extends JPanel {
             int col = element.getCol();
 
             g.drawImage(image, col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE, this);
+
         });
+        int pontosHuman = model.getHumanPlayer().getPoints();
+        int pontosCpu = model.getCpuPlayer().getPoints();
+        g.drawString(String.valueOf(pontosHuman), 190, 80);
+        g.drawString(String.valueOf(pontosCpu), 190, 60);
+        g.drawString("PLAYER SCORE:", 60, 80);
+        g.drawString("CPU SCORE:", 60, 60);
+
 
         // Linha necessária para evitar atrasos
         // de renderização em sistemas Linux.
